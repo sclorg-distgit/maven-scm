@@ -34,7 +34,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.8.1
-Release:        2.11%{?dist}
+Release:        2.12%{?dist}
 Summary:        Common API for doing SCM operations
 License:        ASL 2.0
 URL:            http://maven.apache.org/scm
@@ -51,18 +51,18 @@ BuildArch:      noarch
 
 BuildRequires:  %{?scl_prefix_java_common}javapackages-tools
 BuildRequires:  %{?scl_prefix_java_common}maven-local
-BuildRequires:  maven30-modello
-BuildRequires:  maven30-plexus-utils >= 1.5.6
-BuildRequires:  maven30-maven-plugin-plugin
-BuildRequires:  maven30-maven-plugin-testing-harness
+BuildRequires:  %{?scl_prefix}modello
+BuildRequires:  %{?scl_prefix}plexus-utils >= 1.5.6
+BuildRequires:  %{?scl_prefix}maven-plugin-plugin
+BuildRequires:  %{?scl_prefix}maven-plugin-testing-harness
 BuildRequires:  bzr
 BuildRequires:  subversion
-BuildRequires:  maven30-plexus-containers-component-metadata
-BuildRequires:  maven30-plexus-containers-container-default
-BuildRequires:  maven30-plexus-classworlds
+BuildRequires:  %{?scl_prefix}plexus-containers-component-metadata
+BuildRequires:  %{?scl_prefix}plexus-containers-container-default
+BuildRequires:  %{?scl_prefix}plexus-classworlds
 
-Requires:       maven30-modello
-Requires:       maven30-velocity >= 1.4
+Requires:       %{?scl_prefix}modello
+Requires:       %{?scl_prefix}velocity >= 1.4
 
 %description
 Maven SCM supports Maven plugins (e.g. maven-release-plugin) and other
@@ -83,7 +83,7 @@ Javadoc for %{pkg_name}.
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %patch6 -p1 -b.orig
 %patch7 -p0 -b.orig
@@ -114,7 +114,7 @@ sed -i s/cvsjava.CvsJava/cvsexe.CvsExe/ maven-scm-client/src/main/resources/META
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 # Don't build and unit run tests because
 # * accurev tests need porting to a newer hamcrest
@@ -123,7 +123,7 @@ set -e -x
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 %{?scl:EOF}
@@ -140,6 +140,9 @@ set -e -x
 %doc LICENSE NOTICE
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1.8.1-2.12
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 1.8.1-2.11
 - maven33 rebuild
 
