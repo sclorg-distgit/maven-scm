@@ -34,7 +34,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.8.1
-Release:        2.12%{?dist}
+Release:        2.13%{?dist}
 Summary:        Common API for doing SCM operations
 License:        ASL 2.0
 URL:            http://maven.apache.org/scm
@@ -50,7 +50,7 @@ Patch7:         vss-modello-config.patch
 BuildArch:      noarch
 
 BuildRequires:  %{?scl_prefix_java_common}javapackages-tools
-BuildRequires:  %{?scl_prefix_java_common}maven-local
+BuildRequires:  %{?scl_prefix}maven-local
 BuildRequires:  %{?scl_prefix}modello
 BuildRequires:  %{?scl_prefix}plexus-utils >= 1.5.6
 BuildRequires:  %{?scl_prefix}maven-plugin-plugin
@@ -140,6 +140,9 @@ set -e -x
 %doc LICENSE NOTICE
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 1.8.1-2.13
+- Fix BR on maven-local & co.
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1.8.1-2.12
 - maven33 rebuild #2
 
